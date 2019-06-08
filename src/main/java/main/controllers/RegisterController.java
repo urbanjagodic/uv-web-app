@@ -37,10 +37,12 @@ public class RegisterController {
         if(userMethods.userInfoValid(user)) {
             userRepo.save(user);
             Logger.log(Logger.TYPE.INFO, "User added to db: " + user);
+            return new ModelAndView("redirect:/dashboard");
         }
         else {
             Logger.log(Logger.TYPE.ERROR, "User input data is not valid!");
+            return new ModelAndView("register");
         }
-        return new ModelAndView("redirect:/dashboard");
+
     }
 }
