@@ -1,34 +1,43 @@
 package main;
 
+import main.utils.Values;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Entity
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
-    @NotNull
-    private Integer id;
+    private String id = UUID.randomUUID().toString();
 
     @NotNull
-    @Column(name = "name")
+    @Column(name = "name", columnDefinition = "VARCHAR(20)")
     private String name;
 
     @NotNull
-    @Column(name = "surname")
+    @Column(name = "surname", columnDefinition = "VARCHAR(20)")
     private String surname;
 
     @NotNull
-    @Column(name = "password")
+    @Column(name = "password", columnDefinition = "VARCHAR(30)")
     private String password;
 
-    public Integer getId() {
+    @NotNull
+    @Column(name = "email", columnDefinition = "VARCHAR(30)")
+    private String email;
+
+    // Inits default logo base64 string
+    @Column(name = "avatar", columnDefinition = "TEXT")
+    private String avatar = Values.defaultLogo;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -54,5 +63,27 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("id: %s, name: %s, lastname: %s, email: %s, password: %s",
+                this.id, this.name, this.surname, this.email, this.password);
     }
 }

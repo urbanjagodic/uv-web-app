@@ -1,1 +1,1 @@
-hi this is dashboard
+<p>${user_id}</p>

@@ -9,7 +9,7 @@
         <div class="row justify-content-md-center">
             <div class="col-8">
                 <form:form class="text-center border border-light p-5" method="post"
-                    action="/dashboard"
+                    action="/login"
                     modelAttribute="login"
                 >
                     <p class="h4 mb-4">Sign in</p>
