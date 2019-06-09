@@ -1,1 +1,1 @@
-You are not authorized to see this content.
+Error: you are not authorized to see this content.

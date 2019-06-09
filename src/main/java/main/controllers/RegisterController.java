@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import main.UserRepository;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @RestController
@@ -31,12 +34,14 @@ public class RegisterController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView registerPost(@Valid @ModelAttribute("user") User user, HttpServletRequest request,
-                                     Model model) {
+                                     HttpSession session, Model model) {
         // validation
         UserMethods userMethods = new UserMethods(userRepo);
         if(userMethods.userInfoValid(user)) {
             userRepo.save(user);
             Logger.log(Logger.TYPE.INFO, "User added to db: " + user);
+            session.setAttribute("user", user);
+            Logger.log(Logger.TYPE.INFO, String.format("User '%s' logged in", user.getId()));
             return new ModelAndView("redirect:/dashboard");
         }
         else {
