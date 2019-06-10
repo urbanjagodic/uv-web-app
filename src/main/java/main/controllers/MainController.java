@@ -64,6 +64,7 @@ public class MainController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session, Model model) {
         session.setAttribute("user", null);
+        Logger.log(Logger.TYPE.INFO, "User logged out");
         return "redirect:/login";
     }
 }

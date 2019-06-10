@@ -21,6 +21,9 @@
         padding: 3%;
 
     }
+    .user_name {
+        font-size: 21px;
+        margin: 6%;
+    }
 </style>
-
 </html>

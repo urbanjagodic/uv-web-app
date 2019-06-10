@@ -55,5 +55,15 @@ public class DashBoardController {
         return "not_authorized";
     }
 
+    @RequestMapping(value ="/dashboard/profileInfo", method = RequestMethod.GET)
+    public String profileInfoPage(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user != null) {
+            model.addAttribute("user", user);
+            return "profile_info";
+        }
+        return "not_authorized";
+    }
+
 
 }
