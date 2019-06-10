@@ -20,13 +20,11 @@ public class Course {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @NotNull
     @Column(name = "userID")
-    private int userID;
+    private String userID;
 
-    @NotNull
     @Column(name = "topicID")
-    private int topicID;
+    private String topicID;
 
 
     public int getId() {
@@ -53,19 +51,19 @@ public class Course {
         this.description = description;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public int getTopicID() {
+    public String getTopicID() {
         return topicID;
     }
 
-    public void setTopicID(int topicID) {
+    public void setTopicID(String topicID) {
         this.topicID = topicID;
     }
 }

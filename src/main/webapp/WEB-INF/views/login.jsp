@@ -7,7 +7,7 @@
 <body>
     <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col-8">
+            <div class="col-8 login_form">
                 <form:form class="text-center border border-light p-5" method="post"
                     action="/login"
                     modelAttribute="login"
@@ -39,4 +39,9 @@
         </div>
     </div>
 </body>
+<style>
+    .login_form {
+        margin-top: 10%;
+    }
+</style>
 </html>
