@@ -47,6 +47,10 @@ public class UserMethods {
         this.userRepo.delete(deletedUser);
     }
 
+    public void updateUser(User user) {
+        this.userRepo.save(user);
+    }
+
     public User changeAvatar(String id, String avatar) {
         User updatedUser = this.getUserByID(id);
         updatedUser.setAvatar(avatar);

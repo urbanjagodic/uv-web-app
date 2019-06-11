@@ -41,7 +41,7 @@
            <div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="create_course_link">
                 Create a custom topic course
           </div>
-         <a id="profile_settings_link" class="mdl-navigation__link" href="/dashboard/settings">Settings</a>
+         <a id="profile_settings_link" class="mdl-navigation__link" href="/dashboard/updateProfile"">Settings</a>
          <div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="profile_settings_link">
            Update your profile
           </div>

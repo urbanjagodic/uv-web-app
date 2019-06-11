@@ -21,7 +21,6 @@ public class User {
     @Column(name = "surname", columnDefinition = "VARCHAR(20)")
     private String surname;
 
-    @NotNull
     @Column(name = "password", columnDefinition = "VARCHAR(30)")
     private String password;
 

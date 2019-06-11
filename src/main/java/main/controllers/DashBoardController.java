@@ -5,6 +5,8 @@ import main.db_methods.CourseMethods;
 import main.db_methods.TopicMethods;
 import main.db_methods.UserMethods;
 import main.utils.Logger;
+import main.utils.Utils;
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,11 +109,61 @@ public class DashBoardController {
             course.setUserID(user.getId());
             course.setTopicID(topicID);
 
-            courseMethods.addNewCourse(course);
-            return "redirect:/dashboard";
+            if(!(Utils.isNull(course.getTitle()) || Utils.isNull(course.getDescription()) ||
+                    Utils.isNull(course.getTopicID()))) {
+                courseMethods.addNewCourse(course);
+                return "redirect:/dashboard";
+            }
+            else {
+                return "redirect:/dashboard/newCourse";
+            }
         }
         return "not_authorized";
     }
+
+    @RequestMapping(value = "/dashboard/updateProfile", method = RequestMethod.GET)
+    public String updateProfile(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user != null) {
+            model.addAttribute("user", user);
+            return "update_profile";
+        }
+        return "not_authorized";
+    }
+
+    @RequestMapping(value = "/dashboard/updateProfile", method = RequestMethod.POST)
+    public String coursesPost(@Valid @ModelAttribute("user") User user,
+                              @RequestParam("old_password") String oldPassword,
+                              @RequestParam("new_password") String newPassword,
+                              @RequestParam("confirm_password") String confirmPassword,
+                              Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("user");
+        if(sessionUser != null) {
+            if(sessionUser.getPassword().equals(oldPassword)) {
+                if(newPassword.equals(confirmPassword)) {
+                    user.setAvatar(sessionUser.getAvatar());
+                    user.setId(sessionUser.getId());
+                    user.setPassword(confirmPassword);
+                    UserMethods userMethods = new UserMethods(userRepo);
+                    userMethods.updateUser(user);
+                    session.setAttribute("user", user);
+                    Logger.log(Logger.TYPE.ERROR, "User info updated");
+                    return "redirect:/dashboard";
+                }
+                else {
+                    Logger.log(Logger.TYPE.ERROR, "Entered passwords do not match");
+                    return "redirect:/dashboard/updateProfile";
+                }
+
+            }
+            else {
+                Logger.log(Logger.TYPE.ERROR, "Old password is not correct");
+                return "redirect:/dashboard/updateProfile";
+            }
+        }
+        return "not_authorized";
+    }
+
 
 
 }

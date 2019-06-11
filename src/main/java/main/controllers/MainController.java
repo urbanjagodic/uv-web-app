@@ -40,9 +40,6 @@ public class MainController {
     public String login(@Valid @ModelAttribute("login") LoginHolder loginData,
                         HttpServletResponse response, HttpServletRequest request, Model model, HttpSession session) {
 
-        // Development values
-        loginData.setEmail("user@user.com");
-        loginData.setPassword("user");
 
         if(!(Utils.isNull(loginData.getEmail()) || Utils.isNull(loginData.getPassword()))) {
 
