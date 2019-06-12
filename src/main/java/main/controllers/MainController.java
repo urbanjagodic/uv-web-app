@@ -31,7 +31,8 @@ public class MainController {
     }
 
     @RequestMapping(value = "/login")
-    public ModelAndView init(Model model) {
+    public ModelAndView init(Model model, HttpSession session) {
+        session.setAttribute("user", null);
         model.addAttribute("login", new LoginHolder());
         return new ModelAndView("login");
     }

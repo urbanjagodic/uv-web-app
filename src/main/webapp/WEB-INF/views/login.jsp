@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Courses app</title>
     <%@include file="../includes/header.jsp" %>
 </head>
 <body>

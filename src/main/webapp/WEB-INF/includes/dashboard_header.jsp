@@ -2,6 +2,7 @@
 <html>
 <head>
     <%@include file="../includes/header.jsp" %>
+    <title>Courses app</title>
 </head>
 <body>
    <!-- Always shows a header, even in smaller screens. -->
@@ -9,7 +10,9 @@
      <header class="mdl-layout__header">
        <div class="mdl-layout__header-row">
          <!-- Title -->
-         <span class="mdl-layout-title">Courses app</span>
+         <span id="dashboard_message" class="mdl-layout-title">
+          Welcome, ${user.getName()} ${user.getSurname()}
+          </span>
          <!-- Add spacer, to align navigation to the right -->
          <div class="mdl-layout-spacer"></div>
          <!-- Navigation. We hide it in small screens. -->
