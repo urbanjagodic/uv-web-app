@@ -26,6 +26,8 @@ public class Course {
     @Column(name = "topicID")
     private String topicID;
 
+    //aditional non-database infomation param
+    private String courseOwner;
 
     public int getId() {
         return id;
@@ -65,5 +67,13 @@ public class Course {
 
     public void setTopicID(String topicID) {
         this.topicID = topicID;
+    }
+
+    public String getCourseOwner() {
+        return courseOwner;
+    }
+
+    public void setCourseOwner(String courseOwner) {
+        this.courseOwner = courseOwner;
     }
 }

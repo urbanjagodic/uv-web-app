@@ -34,6 +34,12 @@ public class UserMethods {
         return null;
     }
 
+
+    public String getUserNameByID(String id) {
+        User user = this.getUserByID(id);
+        return String.format("%s %s", user.getName(), user.getSurname());
+    }
+
     public User userExists(String email) {
         for (User user : this.getAllUsers()) {
             if(user.getEmail().equals(email))

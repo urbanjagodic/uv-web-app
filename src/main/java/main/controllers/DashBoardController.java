@@ -81,7 +81,38 @@ public class DashBoardController {
     @RequestMapping(value = "/dashboard/courses", method = RequestMethod.GET)
     public String courses(@RequestParam("id") String id, Model model, HttpSession session) {
         String topicID = id;
-        return "neki";
+        User user = (User) session.getAttribute("user");
+        if(user != null) {
+            CourseMethods courseMethods = new CourseMethods(courseRepo, new UserMethods(userRepo));
+            List<Course> courses = courseMethods.getCoursesByTopicId(topicID);
+            model.addAttribute("courses", courses);
+            return "courses";
+        }
+        return "not_authorized";
+    }
+
+    @RequestMapping(value = "/dashboard/start_course", method = RequestMethod.GET)
+    public String startCourse(@RequestParam("id") String id, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user != null) {
+            CourseMethods courseMethods = new CourseMethods(courseRepo);
+            Course startCourse = courseMethods.getCourseById(id);
+            model.addAttribute("course", startCourse);
+            return "start_course";
+        }
+        return "not_authorized";
+    }
+
+    @RequestMapping(value = "/dashboard/yourCourses", method = RequestMethod.GET)
+    public String yourCourses(Model model, HttpSession session) {
+        User currentUser =  (User) session.getAttribute("user");
+        if(currentUser != null) {
+            CourseMethods courseMethods = new CourseMethods(courseRepo);
+            List<Course> courses = courseMethods.getUserCourses(currentUser.getId());
+            model.addAttribute("courses", courses);
+            return "your_courses";
+        }
+        return "not_authorized";
     }
 
 

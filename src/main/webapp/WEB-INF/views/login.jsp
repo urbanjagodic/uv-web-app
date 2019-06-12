@@ -16,6 +16,7 @@
                     <p class="h4 mb-4">Sign in</p>
                     <form:input type="email" path="email" class="form-control mb-4" placeholder="E-mail"/>
                     <form:input type="password" path="password" class="form-control mb-4" placeholder="Password"/>
+                    <form:errors path="password"/>
 
                     <div class="d-flex justify-content-around">
                         <div>
